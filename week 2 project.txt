@@ -1,0 +1,43 @@
+                     
+CODE
+HTML:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library </title>
+</head>
+<body bgcolor="skyblue">
+    <h1><center><u><i>Library Management System</i></u></h1></center>
+    <label for="bookTitle">Book Title:</label>
+    <input type="text" id="bookTitle">
+    <label for="authorName">Author:</label>
+    <input type="text" id="authorName">
+    <label for="yearOfPublication">Year of Publication:</label>
+    <input type="number" id="yearOfPublication">
+    <button onclick="addBook()">Add Book</button>
+    <ul id="bookList">
+        <!-- Book items will be added here -->
+    </ul>
+    <script src="script.js"></script>
+</body>
+</html>
+SCRIPT:
+function addBook() {
+  const bookTitle = document.getElementById("bookTitle").value;
+  const authorName = document.getElementById("authorName").value;
+  const yearOfPublication = parseInt(document.getElementById("yearOfPublication").value);
+  const currentYear = new Date().getFullYear();
+  const ageOfBook = currentYear - yearOfPublication;
+  const bookList = document.getElementById("bookList");
+  const bookItem = document.createElement("li");
+  bookItem.innerHTML = `${bookTitle} Written by ${authorName} (Published in ${yearOfPublication}, ${ageOfBook} years old) <button onclick="removeBook(this)">Remove</button>`;
+  bookList.appendChild(bookItem);
+  document.getElementById("bookTitle").value = "";
+  document.getElementById("authorName").value = "";
+  document.getElementById("yearOfPublication").value = "";  
+}
+function removeBook(button) {
+  const bookItem = button.parentNode;
+  bookItem.parentNode.removeChild(bookItem);  }
